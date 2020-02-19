@@ -6,16 +6,13 @@ import AddTodo from '../../components/AddTodo/AddTodo';
 export default class Todos extends Component {
 
   state = {
-    todos: [
-      {
-        title: 'todo1',
-        completed: false,
-      },
-      {
-        title: 'todo1',
-        completed: false,
-      }
-    ]
+    todos: []
+  }
+
+  newTodoHandler = (todoText) => {
+    const todo = { todoTitle: todoText, completed: false };
+    const wholeTodos = [...this.state.todos, todo];
+    this.setState({ todos: wholeTodos });
   }
 
   render() {
@@ -25,9 +22,10 @@ export default class Todos extends Component {
 
     return (
       <div style={todoStyle}>
-        <AddTodo />
-        {this.state.todos.map(todo => {
-          return <Todo todo={todo.title} />
+        <AddTodo newTodo={this.newTodoHandler} />
+        {this.state.todos.map((todo, index) => {
+          return <Todo todo={todo.todoTitle}
+            key={index} />
         })}
       </div>
     )
