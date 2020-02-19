@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Todo from '../../components/Todo/Todo';
 import AddTodo from '../../components/AddTodo/AddTodo';
+import './Todos.css';
 
 export default class Todos extends Component {
 
@@ -16,18 +17,16 @@ export default class Todos extends Component {
   }
 
   render() {
-    const todoStyle = {
-      'textAlign': 'center'
-    }
-
     return (
-      <div style={todoStyle}>
+      <div>
         <AddTodo newTodo={this.newTodoHandler} />
-        {this.state.todos.map((todo, index) => {
-          return <Todo todo={todo.todoTitle}
-            key={index} />
-        })}
-      </div>
+        <ul>
+          {this.state.todos.map((todo, index) => {
+            return <Todo todo={todo.todoTitle}
+              key={index} />
+          })}
+        </ul>
+      </div >
     )
   }
 }
