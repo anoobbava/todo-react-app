@@ -16,6 +16,16 @@ export default class Todos extends Component {
     this.setState({ todos: wholeTodos });
   }
 
+  completeTodoHandler = (todoText) => {
+    const currentTodos = this.state.todos;
+    currentTodos.forEach(element => {
+      if (element['todoTitle'] === todoText) {
+        element['completed'] = !element['completed']
+      }
+    });
+    this.setState({ todos: currentTodos });
+  }
+
   render() {
     return (
       <div>
@@ -23,7 +33,9 @@ export default class Todos extends Component {
         <ul>
           {this.state.todos.map((todo, index) => {
             return <Todo todo={todo.todoTitle}
-              key={index} />
+              key={index}
+              updateTodo={this.completeTodoHandler}
+              completed={todo.completed} />
           })}
         </ul>
       </div >
